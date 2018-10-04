@@ -4,39 +4,83 @@ const parseXMLString = require('xml2js').parseString
 const apis = require('../apis');
 
 routes.post('/', (req, res) => {
-  // Verify request source/referrer (whitneycanrey.com)
-  // Verify request body
-  // Verify request body.address
-  // Verify request body.emailAddress (included and valid format)
+  // TODO: Implment pseudo
+  // if (
+  //   req.headers.origin !== 'deployed address' ||
+  //   req.headers.referer !== 'deployed address'
+  // ) { console.error('Not from trusted requestor') }
 
-  const formData = req.body;
-  const address = formData.address;
+  // TODO: Implement pseudo
+  // if (
+  //   !req.body
+  //   !req.body.emailAddress
+  //   !req.body.streetAddress
+  //   !req.body.city
+  //   !req.body.state
+  // ) { console.error('Not a valid request') }
 
-  // Send request to Zestimate
+
+  const {
+    city,
+    emailAddress,
+    state,
+    streetAddress,
+    zip,
+  } = req.body;
+  
   // Error handling!
-  // .then( verify Zillow response)
   // if no amount - what to send back to FE? Error with email to Whitney?
   // if zillow error - what to send back to FE? Error with email to Whitney for followup?
   const handleZillowResponse = (zillowResponse) => {
     res.setHeader('Content-Type', 'application/json');
-    return parseXMLString(zillowResponse.data, { explicitArray: false }, (err, result) => res.send(JSON.stringify(result)))
+    let jsonResponse;
+    if (
+      zillowResponse &&
+      typeof zillowResponse === 'object' &&
+      zillowResponse.status === 200 &&
+      zillowResponse.data &&
+      typeof zillowResponse.data === 'string'
+    ) {
+      parseXMLString(zillowResponse.data, { explicitArray: false }, (err, result) => jsonResponse = JSON.parse(JSON.stringify(result)));
+    }
+
+    if (
+      jsonResponse &&
+      jsonResponse["SearchResults:searchresults"] &&
+      jsonResponse["SearchResults:searchresults"].message &&
+      jsonResponse["SearchResults:searchresults"].message.code === '0'
+    ) {
+      const {
+        zpid: zillowPropertyId,
+        zestimate: {
+          amount: {
+            _: zestimate,
+          },
+        },
+        links: {
+          comparables: comparablesLink,
+          homedetails: homeDetailsLink,
+        },
+      } = jsonResponse["SearchResults:searchresults"].response.results.result
+      const formattedEstimate = parseInt(zestimate).toLocaleString('en-US')
+
+      // TODO: Start sending the notifications off!
+
+    } else {
+      console.error('Did not get a valid response from Zillow', JSON.stringify(zillowResponse));
+    }
   }
 
-  // home details:
-  //   SearchResults:searchresults.request.address
-  //   SearchResults:searchresults.request.citystatezip
-  
-  // zillow homeId
-  //   SearchResults:searchresults.response.results.result.zpid
-
-  // zillow estimated value:
-  //   SearchResults:searchresults.response.results.result.zestimate.amount._ (need to format into USD currency)
-
-  // zillow home details:
-  //   SearchResults:searchresults.response.results.result.links.comparables
-  //   SearchResults:searchresults.response.results.result.links.homedetails
-
-  axios({ url: `${apis.zillow}?zws-id=${process.env.ZWSID}&address=urlEncodedAddress`, responseType: 'text' })
+  axios({
+    method: 'get',
+    url: apis.zillow,
+    params: {
+      ['zws-id']: process.env.ZWSID,
+      address: streetAddress,
+      citystatezip: city+','+state+(zip ? ','+zip : ''),
+    },
+    responseType: 'text',
+  })
     .then(handleZillowResponse)
 
 });
