@@ -1,7 +1,8 @@
-const routes = require('express').Router();
+const routes = require('express').Router()
 const axios = require('axios')
 const parseXMLString = require('xml2js').parseString
-const apis = require('../apis');
+const apis = require('../apis')
+const sendEstimate = require('../email')
 
 routes.post('/', (req, res) => {
   // TODO: Implment pseudo
@@ -21,19 +22,19 @@ routes.post('/', (req, res) => {
 
 
   const {
-    city,
-    emailAddress,
-    state,
-    streetAddress,
-    zip,
-  } = req.body;
+    address,
+    email: requestEmail,
+  } = req.body
   
+  // TODO: Need validations
+  const [streetAddress, city, state, zip]= address.split(',').map(val => val.trim())
+
   // Error handling!
   // if no amount - what to send back to FE? Error with email to Whitney?
   // if zillow error - what to send back to FE? Error with email to Whitney for followup?
   const handleZillowResponse = (zillowResponse) => {
-    res.setHeader('Content-Type', 'application/json');
-    let jsonResponse;
+    res.setHeader('Content-Type', 'application/json')
+    let jsonResponse
     if (
       zillowResponse &&
       typeof zillowResponse === 'object' &&
@@ -41,7 +42,7 @@ routes.post('/', (req, res) => {
       zillowResponse.data &&
       typeof zillowResponse.data === 'string'
     ) {
-      parseXMLString(zillowResponse.data, { explicitArray: false }, (err, result) => jsonResponse = JSON.parse(JSON.stringify(result)));
+      parseXMLString(zillowResponse.data, { explicitArray: false }, (err, result) => jsonResponse = JSON.parse(JSON.stringify(result)))
     }
 
     if (
@@ -64,10 +65,18 @@ routes.post('/', (req, res) => {
       } = jsonResponse["SearchResults:searchresults"].response.results.result
       const formattedEstimate = parseInt(zestimate).toLocaleString('en-US')
 
-      // TODO: Start sending the notifications off!
+      const dataToSend = {
+        address,
+        requestEmail,
+        comparablesLink,
+        homeDetailsLink,
+        formattedEstimate,
+      }
+
+      sendEstimate(dataToSend)
 
     } else {
-      console.error('Did not get a valid response from Zillow', JSON.stringify(zillowResponse));
+      console.error('Did not get a valid response from Zillow', zillowResponse)
     }
   }
 
@@ -82,7 +91,8 @@ routes.post('/', (req, res) => {
     responseType: 'text',
   })
     .then(handleZillowResponse)
+    .catch(err => console.log(err))
 
-});
+})
 
 module.exports = routes
