@@ -1,10 +1,16 @@
+const path = require('path')
 const routes = require('express').Router()
 const axios = require('axios')
 const parseXMLString = require('xml2js').parseString
 const apis = require('../apis')
 const sendEstimate = require('../email')
 
-routes.post('/', (req, res) => {
+// Temporary route - remove later
+routes.get('/', (req, res) => res.sendFile(path.join(__dirname + '/../index.html')))
+
+routes.get('/bundle.js', (req, res) => res.sendFile(path.join(__dirname + '/../bundle.js')));
+
+routes.post('/estimate-request', (req, res) => {
   // TODO: Implment pseudo
   // if (
   //   req.headers.origin !== 'deployed address' ||
@@ -33,7 +39,6 @@ routes.post('/', (req, res) => {
   // if no amount - what to send back to FE? Error with email to Whitney?
   // if zillow error - what to send back to FE? Error with email to Whitney for followup?
   const handleZillowResponse = (zillowResponse) => {
-    res.setHeader('Content-Type', 'application/json')
     let jsonResponse
     if (
       zillowResponse &&
