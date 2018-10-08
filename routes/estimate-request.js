@@ -56,20 +56,30 @@ router.post('/estimate-request', (req, res) => {
           amount: {
             _: zestimate,
           },
+          valuationRange: {
+            high: {
+              _: zestimateRangeHigh,
+            },
+            low: {
+              _: zestimateRangeLow,
+            },
+          },
         },
         links: {
           comparables: comparablesLink,
           homedetails: homeDetailsLink,
         },
       } = jsonResponse["SearchResults:searchresults"].response.results.result
-      const formattedEstimate = parseInt(zestimate).toLocaleString('en-US')
+      
 
       const dataToSend = {
         address,
         requestEmail,
         comparablesLink,
         homeDetailsLink,
-        formattedEstimate,
+        formattedZestimate: parseInt(zestimate).toLocaleString('en-US'),
+        formattedZestimateRangeHigh: parseInt(zestimateRangeHigh).toLocaleString('en-US'),
+        formattedZestimateRangeLow: parseInt(zestimateRangeLow).toLocaleString('en-US'),
       }
 
       sendEstimate(dataToSend)

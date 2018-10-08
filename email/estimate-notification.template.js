@@ -4,7 +4,9 @@ module.exports = function(data) {
     requestEmail,
     comparablesLink,
     homeDetailsLink,
-    formattedEstimate,
+    formattedZestimate,
+    formattedZestimateRangeLow,
+    formattedZestimateRangeHigh,
   } = data; 
 
   return {
@@ -12,10 +14,13 @@ module.exports = function(data) {
     to: `${process.env.MAIN_NAME_FULL}, ${process.env.MAIN_EMAIL}`,
     subject: 'New Estimate Requested!',
     text: `New estimate requested:
-    Requestor: ${requestEmail},
-    Address: ${address},
-    Zestimate: ${formattedEstimate},
-    Home Details: ${homeDetailsLink},
-    Comparables: ${comparablesLink}`
+    Requestor: ${requestEmail}
+    Address: ${address}
+
+    ZILLOW
+    Zestimate: $${formattedZestimate}
+    Zestimate Range: $${formattedZestimateRangeLow} - $${formattedZestimateRangeHigh}
+    Home Details: ${homeDetailsLink}
+    Comparables: ${comparablesLink}`,
   }
 }

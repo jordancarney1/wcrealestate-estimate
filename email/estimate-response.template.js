@@ -1,8 +1,10 @@
 module.exports = function(data) {
   const {
     address,
-    formattedEstimate,
+    formattedZestimate,
     requestEmail,
+    formattedZestimateRangeLow,
+    formattedZestimateRangeHigh,
   } = data;
 
   return {
@@ -13,12 +15,12 @@ module.exports = function(data) {
 
     You can see the instant valuations for your home below:
 
-    <b>Eppraisal</b>: Between <b>$166,515</b> and <b>$225,285</b>
-    <b>Zillow Zestimate</b>: Between <b>$199,674</b> and <b>$220,692</b>
-    
-    Here is your home value estimate for ${address}.
-    $${formattedEstimate}
+    <b>Eppraisal</b>
+    Between <b>$166,515</b> and <b>$225,285</b>
 
+    <b>Zillow Zestimate</b>
+    Between <b>$${formattedZestimateRangeLow}</b> and <b>$${formattedZestimateRangeHigh}</b>
+    
     These online valuations aren't always as accurate as they could be, so I can create a custom report for you. Have you recently remodeled or know of anything that might affect your home's value?
 
     Regards,
