@@ -10,7 +10,7 @@ module.exports = function(data) {
   return {
     from: `${process.env.MAIN_NAME_FULL} <${process.env.MAIN_EMAIL}>`,
     to: requestEmail,
-    subject: `Estimate for ${address}`,
+    subject: `Estimate Request for ${address}`,
     text: `Hi there,
 
     You can see the instant valuations for your home below:
@@ -26,7 +26,7 @@ module.exports = function(data) {
     Regards,
 
     ${process.env.MAIN_NAME_FULL}
-    ${process.env.MAIN_EMAIL}
-    ${process.env.MAIN_PHONE}`,
+    ${process.env.MAIN_PHONE}
+    ${process.env.MAIN_EMAIL}`,
   }
 }
