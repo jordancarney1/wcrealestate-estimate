@@ -7,6 +7,7 @@ module.exports = function(data) {
     formattedZestimate,
     formattedZestimateRangeLow,
     formattedZestimateRangeHigh,
+    zillowPropertyId,
   } = data; 
 
   return {
@@ -18,6 +19,7 @@ module.exports = function(data) {
     Address: ${address}
 
     ZILLOW
+    Zillow ID: $${zillowPropertyId}
     Zestimate: $${formattedZestimate}
     Zestimate Range: $${formattedZestimateRangeLow} - $${formattedZestimateRangeHigh}
     Home Details: ${homeDetailsLink}

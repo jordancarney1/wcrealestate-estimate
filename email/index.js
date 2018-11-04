@@ -8,8 +8,14 @@ const notificationTemplate = require('./estimate-notification.template')
 function sendEstimate(data) {
   const responseData = responseTemplate(data)
   const notificationData = notificationTemplate(data)
-  mailgun.messages().send(responseData, (error, body) => console.log(body));
-  mailgun.messages().send(notificationData, (error, body) => console.log(body));
+
+  // TODO: Error handling
+  mailgun.messages().send(responseData, (error, body) => {
+    if (error) console.error(error)
+  });
+  mailgun.messages().send(notificationData, (error, body) => {
+    if (error) console.error(error)
+  });
 }
 
 module.exports = sendEstimate;

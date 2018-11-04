@@ -12,7 +12,7 @@ module.exports = function(data) {
     subject: `Estimate Request for ${address}`,
     text: `Hi there,
 
-    You can see the instant valuations for your home below:
+    You can see the instant valuation for your home below:
 
     Zillow Zestimate</b>
     Between $${formattedZestimateRangeLow} and $${formattedZestimateRangeHigh}
@@ -29,7 +29,7 @@ module.exports = function(data) {
       <html>
       Hi there,<br />
       <br />
-      You can see the instant valuations for your home below:<br />
+      You can see the instant valuation for your home below:<br />
       <br />
       <b>Zillow Zestimate</b><br />
       Between <b>$${formattedZestimateRangeLow}</b> and <b>$${formattedZestimateRangeHigh}</b><br />
