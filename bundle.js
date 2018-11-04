@@ -4,7 +4,8 @@
   const submitButton = document.querySelector('#submitButton')
   const estimateForm = document.querySelector('#propertyEstimateForm')
   const emailField = document.querySelector('#email')
-  
+  const requestForm = document.querySelector('#requestForm')
+
   let isEmailValid;
 
   autocomplete = new google.maps.places.Autocomplete(addressField);
@@ -31,14 +32,36 @@
     }
   }
 
+  function showMessage(isSuccess) {
+    const successHTML = '<h1>Success!</h1>\
+      <p>Your home\'s estimate has been sent and will arrive in your email inbox shortly.</p>'
+    const failHTML = '<h1>Uh oh...</h1>\
+      <p>It looks like something went wrong, please try again.</p>'
+    const div = document.createElement('div')
+    div.innerHTML = isSuccess ? successHTML : failHTML
+    requestForm.innerHTML = ""
+    requestForm.appendChild(div)
+    
+  }
+
   function handleSubmission(evt) {
     evt.preventDefault();
     const isAddressValid = addressField.value.length > 0
     const isFormValid = isAddressValid && isEmailValid;
-    
+    const postData = JSON.stringify({
+      [addressField.name]: addressField.value,
+      [emailField.name]: emailField.value,
+    })
+
     if (isFormValid) {
-      estimateForm.submit()
-      return;
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/estimate-request", true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(postData);
+      xhr.onload = function() {
+        const isValid = this.responseText === 'OK' && this.status === 200
+        showMessage(isValid)
+      }
     }
     
     // Light up validation errors.
