@@ -59,12 +59,12 @@
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send(postData);
       xhr.onload = function() {
-        const isValid = this.responseText === 'OK' && this.status === 200
+        const isValid = this.status === 200
         showMessage(isValid)
       }
     }
     
-    // Light up validation errors.
+    // Light up validation errors?
     
   }
   

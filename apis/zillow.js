@@ -8,17 +8,13 @@ module.exports = {
     method: 'get',
     url,
     params: {
-      ['zws-id']: process.env.ZWSID,
+      'zws-id': process.env.ZWSID,
       address: streetAddress,
       citystatezip: city+','+state+(zip ? ','+zip : ''),
     },
     responseType: 'text',
   }),
   handleResponse: (zillowResponse) => {
-    console.log(zillowResponse)
-    console.log('=======')
-    console.log(zillowResponse.data)
-    console.log('=======')
     let jsonResponse
     if (
       zillowResponse &&
