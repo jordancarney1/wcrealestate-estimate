@@ -8,7 +8,7 @@
 
   let isEmailValid;
 
-  autocomplete = new google.maps.places.Autocomplete(addressField);
+  const autocomplete = new google.maps.places.Autocomplete(addressField);
   
   function handleAddressInputAutocomplete() {
     const placeData = autocomplete.getPlace();
