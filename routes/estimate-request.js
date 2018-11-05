@@ -78,10 +78,10 @@ router.post('/estimate-request', (req, res) => {
         if (index === 0) {
           const zillowData = apis.zillow.handleResponse(request.result)
           sendApiResults(zillowData)
-          res.sendStatus(200).send('ok')
+          res.status(200).send('ok')
         }
       })
     })
-    .catch(err => console.error(err))
+    .catch(err => console.error('Promise All...', err))
 
 })
