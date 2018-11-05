@@ -4,12 +4,13 @@
   "description": "Free estimate lead gen for whitney carney real estate",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm run transpile && npm run compress",
     "transpile": "./node_modules/.bin/babel ./client/js/index.js --out-file bundle.js",
     "compress": "uglifyjs bundle.js -o bundle.js -c -m",
     "debug": "nodemon --inspect-brk=9999 server.js",
+    "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jordan Carney",
@@ -28,7 +29,6 @@
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
-    "node-sass": "^4.9.3",
     "nodemon": "^1.18.4"
   }
 }
