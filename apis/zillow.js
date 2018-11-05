@@ -15,11 +15,6 @@ module.exports = {
     responseType: 'text',
   }),
   handleResponse: (zillowResponse) => {
-    console.log('============')
-    console.log(zillowResponse)
-    console.log('============')
-    console.log(zillowResponse.data)
-    console.log('============')
     let jsonResponse
     if (
       zillowResponse &&
