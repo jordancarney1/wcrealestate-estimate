@@ -3,7 +3,9 @@ const app = require('express')()
 const bodyParser = require('body-parser')
 const router = require('./routes')
 const port = process.env.PORT || 3000
+const forceHTTPS = require('./middleware/forceHTTPS')
 
+app.use(forceHTTPS)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(router)
