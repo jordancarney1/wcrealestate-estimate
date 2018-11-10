@@ -406,6 +406,14 @@ button:hover {
   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
 }
 
+button.disabled {
+  background-color: #ccc;
+}
+
+button.disabled:hover {
+  cursor: not-allowed;
+}
+
 a {
   color: #E05454;
   text-decoration: none;
@@ -545,7 +553,7 @@ footer.page-footer .footer-agent-text h5 {
           <input type="email" id="email" name="email" placeholder="Enter your email" />
         </div>
 
-        <button type="button" id="submitButton">Get Estimate</button>
+        <button class="disabled" type="button" id="submitButton" disabled>Get Estimate</button>
       </form>
     </div>
   </div>
