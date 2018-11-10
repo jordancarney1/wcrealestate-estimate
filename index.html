@@ -356,11 +356,101 @@ body {
   background-color: #f5f5f5;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,
+h2,
+h3,
+h4,
+h5,
 label {
   color: rgb(180, 1, 1);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+h5 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 110%;
+  margin: .625rem 0 .5rem 0;
+}
+
+button {
+  background-color: #E05454;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0px 30px;
+  color: white;
+  letter-spacing: 0.5px;
+  transition: 0.2s ease-out;
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  border: none;
+  outline: none;
+  font-size: 12px;
+}
+
+button:hover {
+  background-color: #F79D9D;
+  color: white;
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+}
+
+a {
+  color: #E05454;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #F79D9D;
+}
+
+header {
+  background-color: #fff;
+  display: flex;
+  padding: 20px;
+}
+
+header .agent-details {
+  display: flex;
+}
+
+header .agent-details img {
+  width: 70px;
+  height: auto;
+}
+
+header .back {
+  font-size: 1.2em;
+  display: flex;
+}
+
+header .back a {
+  display: flex;
+  margin: auto;
+}
+
+header .back a span {
+  margin: auto;
+}
+
+header .back .icon {
+  font-size: 2em;
+}
+
+.content {
+  flex: 1 0 auto;
+  padding: 20px;
 }
 
 .inputContainer {
@@ -387,69 +477,94 @@ label {
   transform: translate(-50%, -50%);
 }
 
-h1 {
-  margin-top: 0;
+.circle {
+  border-radius: 50%;
 }
 
-/* .aligner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 24em;
+.end-row {
+  align-self: flex-end;
+  margin-left: auto;
 }
 
-form {
-  flex: none;
-  max-width: 50%;
-  flex: 1;
-  padding: 15em;
-} */
+footer {
+  flex-shrink: 0;
+  background-color: #232628;
+  color: rgba(255,255,255,0.8);
+  overflow: hidden;
+}
 
-button {
-  background-color: #E05454;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 0px 30px;
-  color: white;
-  letter-spacing: 0.5px;
-  transition: 0.2s ease-out;
+footer.page-footer .footer-agent-text h5 {
+  color: #fff;
+}
+
+.footer-agent-text {
+  padding: 20px;
   text-align: center;
-  height: 45px;
-  line-height: 45px;
-  border: none;
-  outline: none;
-  font-size: 12px;
 }
 
-button:hover {
-  background-color: #F79D9D;
-  color: white;
-  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+.footer-copyright {
+  padding: 20px;
+}
+
+.black {
+  background-color: #000;
 }
 
   </style>
 </head>
 <body>
-  <div class="aligner" id="requestForm">
-    <h1>How much is your home worth?</h1>
-    <form id="propertyEstimateForm">
-      
-      <div class="inputContainer">
-        <label for="address">Street Address</label>
-        <input type="text" id="address" name="address" placeholder="Enter your address" autocomplete="off" />
-      </div>
-    
-      <div class="inputContainer">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" />
-      </div>
+  <header>
+    <div class="back">
+      <a href="https://www.whitneycarney.com"><span class="icon">&larr;</span> <span>back to website</span></a>
+    </div>
 
-      <button type="button" id="submitButton">Get Estimate</button>
-    </form>
+    <div class="agent-details end-row">
+      <div>
+        <h5>Whitney Carney, Realtor</h5>
+        <h5>
+          <a class="email" href="mailto:wcarney@kw.com" itemprop="email">Email Me</a> | <a class="tel" href="tel:407-625-7142" itemprop="telephone">407-625-7142</a>
+        </h5>
+      </div>
+      <div class="end-row">
+      <img src="https://media.placester.com/image/upload/c_scale,dpr_1.0,f_auto,h_400,q_auto,r_max,w_400/v1/inception-app-prod/Mzk5ZmY1MjktNTA0ZS00NTg5LWIwMWMtZDMzODA3ZDg2YjBk/logo/2017/12/Copy%20of%20untitled-7412-Edit.jpg" alt="" class=" circle cld-responsive" data-src="https://media.placester.com/image/upload/c_scale,dpr_auto,f_auto,h_400,q_auto,r_max,w_400/v1/inception-app-prod/Mzk5ZmY1MjktNTA0ZS00NTg5LWIwMWMtZDMzODA3ZDg2YjBk/logo/2017/12/Copy%20of%20untitled-7412-Edit.jpg" height="400" width="400">
+      </div>
+    </div>
+  </header>
+  <div class="content">
+    <div class="aligner" id="requestForm">
+      <h1>How much is your home worth?</h1>
+      <form id="propertyEstimateForm">
+        
+        <div class="inputContainer">
+          <label for="address">Street Address</label>
+          <input type="text" id="address" name="address" placeholder="Enter your address" autocomplete="off" />
+        </div>
+      
+        <div class="inputContainer">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" />
+        </div>
+
+        <button type="button" id="submitButton">Get Estimate</button>
+      </form>
+    </div>
   </div>
+  
+  <footer class="page-footer">
+    <div class="footer-agent-text">
+        <h5>Whitney Carney</h5>
+        <h5>
+          <a class="email" href="mailto:wcarney@kw.com" itemprop="email">Email Me</a> | <a class="tel" href="tel:407-625-7142" itemprop="telephone">407-625-7142</a>
+        </h5>
+    </div>
+    
+    <div class="footer-copyright black">
+          ©2018 Keller Williams
+          | <a href="http://www.kw.com/kw/Agent-Site-Terms.html" target="_blank">Terms of Use</a>
+          <a href="http://www.kw.com/kw/Agent-Site-Privacy.html" target="_blank">Privacy</a>
+    </div>
+  </footer>
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpxyI6N4ePbWfiqbLeN5n1cEFde3F0pBI&amp;libraries=places"></script>
 <script type="text/javascript" src="/bundle.js"></script>
 </body>
