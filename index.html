@@ -427,6 +427,7 @@ header {
   background-color: #fff;
   display: flex;
   padding: 20px;
+  min-height: 125px;
 }
 
 header .agent-details {
@@ -434,8 +435,9 @@ header .agent-details {
 }
 
 header .agent-details img {
-  width: 70px;
+  width: 96px;
   height: auto;
+  border-radius: 50%;
 }
 
 header .back {
@@ -458,6 +460,9 @@ header .back .icon {
 }
 
 .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1 0 auto;
   padding: 20px;
 }
@@ -473,17 +478,14 @@ header .back .icon {
 
 .inputContainer input {
   display: block;
-  min-width: 500px;
+  width: 80vw;
+  max-width: 500px;
   padding: 8px;
 }
 
 .aligner {
-  padding: 1em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  flex: none;
+  max-width: 90vw;
 }
 
 .circle {
@@ -519,6 +521,12 @@ footer.page-footer .footer-agent-text h5 {
   background-color: #000;
 }
 
+@media screen and (max-width: 500px) {
+  header {
+    flex-direction: column;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -535,7 +543,7 @@ footer.page-footer .footer-agent-text h5 {
         </h5>
       </div>
       <div class="end-row">
-      <img src="https://media.placester.com/image/upload/c_scale,dpr_1.0,f_auto,h_400,q_auto,r_max,w_400/v1/inception-app-prod/Mzk5ZmY1MjktNTA0ZS00NTg5LWIwMWMtZDMzODA3ZDg2YjBk/logo/2017/12/Copy%20of%20untitled-7412-Edit.jpg" alt="" class=" circle cld-responsive" data-src="https://media.placester.com/image/upload/c_scale,dpr_auto,f_auto,h_400,q_auto,r_max,w_400/v1/inception-app-prod/Mzk5ZmY1MjktNTA0ZS00NTg5LWIwMWMtZDMzODA3ZDg2YjBk/logo/2017/12/Copy%20of%20untitled-7412-Edit.jpg" height="400" width="400">
+      <img src="https://media.placester.com/image/upload/c_scale,dpr_1.0,f_auto,q_auto,w_400/v1/inception-app-prod/Mzk5ZmY1MjktNTA0ZS00NTg5LWIwMWMtZDMzODA3ZDg2YjBk/logo/2017/12/Copy%20of%20untitled-7412-Edit.jpg" height="500" width="500">
       </div>
     </div>
   </header>
